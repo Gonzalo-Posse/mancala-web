@@ -1,0 +1,99 @@
+/* Misma paleta que la app (src/constants/theme.ts). */
+:root {
+  --background: #fdf8f3;
+  --surface: #f5e6d3;
+  --border: #d4c4b0;
+  --text: #5d4a3a;
+  --text-muted: #8b6b4a;
+  --primary: #b9773a;
+  --primary-text: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+main {
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 40px 16px;
+  text-align: center;
+}
+
+.icon {
+  width: 112px;
+  height: 112px;
+  border-radius: 26px;
+  box-shadow: 0 6px 20px rgba(93, 74, 58, 0.25);
+}
+
+h1 {
+  margin: 16px 0 4px;
+  font-size: 32px;
+}
+
+.lead {
+  margin: 0 0 24px;
+  color: var(--text-muted);
+}
+
+.code {
+  margin: 8px 0 20px;
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: 6px;
+}
+
+.button {
+  display: block;
+  margin: 12px 0;
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--primary);
+  color: var(--primary-text);
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.button.secondary {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.card {
+  margin-top: 28px;
+  padding: 16px 20px;
+  border-radius: 22px;
+  background: var(--surface);
+  text-align: left;
+}
+
+.card h2 {
+  margin: 0 0 8px;
+  font-size: 17px;
+}
+
+.card ol {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.muted {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+[hidden] {
+  display: none !important;
+}

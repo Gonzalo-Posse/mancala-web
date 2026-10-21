@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mancala</title>
+    <meta name="description" content="Mancala para Android: jugá contra la IA, con un amigo en el mismo teléfono u online." />
+    <meta property="og:title" content="Mancala" />
+    <meta property="og:description" content="Jugá Mancala contra la IA, con un amigo u online." />
+    <meta property="og:image" content="icon.png" />
+    <link rel="icon" href="favicon.png" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <img class="icon" src="icon.png" alt="" />
+      <h1>Mancala</h1>
+      <p class="lead" data-t="lead">Jugá contra la IA, con un amigo en el mismo teléfono u online.</p>
+
+      <p id="invite" hidden>
+        <span data-t="invite">Cuando la tengas, abrí la app → "Jugar online" → "Entrar a una sala" y escribí:</span>
+        <span class="code" id="code" style="display: block"></span>
+      </p>
+
+      <!-- Link fijo: siempre baja el APK de la última release de GitHub (ver DISTRIBUCION.md en el repo del juego). -->
+      <a class="button" href="https://github.com/Gonzalo-Posse/mancala-web/releases/latest/download/mancala.apk" data-t="download">
+        Descargar para Android
+      </a>
+      <p class="muted" data-t="size">Archivo APK para teléfonos Android</p>
+
+      <section class="card">
+        <h2 data-t="howTitle">Cómo instalarla</h2>
+        <ol>
+          <li data-t="step1">Tocá "Descargar para Android".</li>
+          <li data-t="step2">Abrí el archivo descargado (mancala.apk).</li>
+          <li data-t="step3">Si Android lo pide, permití "instalar apps de esta fuente".</li>
+          <li data-t="step4">Tocá "Instalar". Las actualizaciones llegan solas, no hace falta volver a bajarla.</li>
+        </ol>
+      </section>
+    </main>
+
+    <script src="i18n.js"></script>
+    <script>
+      // Si viene de una invitación (sala/?c=CÓDIGO sin la app instalada), muestra el código.
+      var code = window.mancalaRoomCode(new URLSearchParams(location.search).get('c'));
+      if (code) {
+        document.getElementById('code').textContent = code;
+        document.getElementById('invite').hidden = false;
+      }
+      window.mancalaTranslate();
+    </script>
+  </body>
+</html>

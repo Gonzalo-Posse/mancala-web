@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Invitación a Mancala</title>
+    <meta name="description" content="Te invitaron a una partida de Mancala." />
+    <meta property="og:title" content="¡Te invitaron a jugar Mancala!" />
+    <meta property="og:description" content="Tocá para entrar a la sala." />
+    <meta property="og:image" content="../icon.png" />
+    <link rel="icon" href="../favicon.png" />
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <main>
+      <img class="icon" src="../icon.png" alt="" />
+      <h1 data-t="inviteTitle">¡Te invitaron a jugar!</h1>
+      <p class="lead" data-t="roomCode">Código de la sala</p>
+      <p class="code" id="code">——————</p>
+
+      <a class="button" id="open" href="#" data-t="open">Abrir en Mancala</a>
+      <a class="button secondary" id="get" href="../" data-t="noApp">No tengo la app: descargarla</a>
+      <p class="muted" id="manual" data-t="manual">
+        ¿No se abre? Abrí la app → "Jugar online" → "Entrar a una sala" y escribí el código.
+      </p>
+      <p class="muted" id="invalid" hidden data-t="invalid">Este link no tiene un código de sala válido.</p>
+    </main>
+
+    <script src="../i18n.js"></script>
+    <script>
+      var code = window.mancalaRoomCode(new URLSearchParams(location.search).get('c'));
+      var download = new URL('../', location.href);
+      if (code) download.searchParams.set('c', code);
+      document.getElementById('get').href = download.href;
+
+      if (!code) {
+        document.getElementById('open').hidden = true;
+        document.getElementById('manual').hidden = true;
+        document.getElementById('invalid').hidden = false;
+      } else {
+        document.getElementById('code').textContent = code;
+        // Android abre la app en la sala (mancala://online/CÓDIGO); si no está instalada,
+        // Chrome va a la página de descarga.
+        var intent =
+          'intent://online/' + code + '#Intent;scheme=mancala;package=com.gapegg.mancala;' +
+          'S.browser_fallback_url=' + encodeURIComponent(download.href) + ';end';
+        var isAndroid = /android/i.test(navigator.userAgent);
+        document.getElementById('open').href = isAndroid ? intent : 'mancala://online/' + code;
+        if (isAndroid) location.href = intent;
+      }
+      window.mancalaTranslate();
+    </script>
+  </body>
+</html>
